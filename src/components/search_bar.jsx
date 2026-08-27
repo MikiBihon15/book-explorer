@@ -12,7 +12,7 @@ export default function SearchBar({ onSearch }) {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col items-end gap-2">
+    <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2">
       {/* Floating Control Center - Snaps to full opacity on hover */}
       <div className="flex items-center gap-2 p-2 bg-white rounded-xl shadow-md opacity-50 hover:opacity-100 border border-gray-200">
         
