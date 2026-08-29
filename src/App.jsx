@@ -14,12 +14,12 @@ export default function App() {
   // useEffect triggers the fetch whenever searchQuery updates
   useEffect(() => {
     const fetchResults = async () => {
-      if (!searchQuery) return;
+      const queryToSearch = searchQuery.trim() !== '' ? searchQuery : 'Novel';
       
       setIsLoading(true);
       setHasSearched(true);
       
-      const results = await searchBooks(searchQuery);
+      const results = await searchBooks(queryToSearch);
       setBooks(results);
       
       setIsLoading(false);
