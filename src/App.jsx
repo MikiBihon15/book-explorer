@@ -54,7 +54,7 @@ export default function App() {
         isDarkMode={isDarkMode}
       />
       
-      <div className="p-10 mt-16 max-w-screen-2xl mx-auto">
+      <div className="px-10 pb-10 pt-24 max-w-screen-2xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">Book Explorer</h1>
         
         <BookList 
