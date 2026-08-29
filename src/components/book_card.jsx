@@ -19,7 +19,7 @@ export default function BookCard({ book, onClick }) {
           No Cover
         </div>
       )}
-      <h3 className="font-bold text-lg leading-tight mb-1 truncate" title={book.title}>
+      <h3 className="font-bold text-lg leading-tight mb-1 text-black truncate" title={book.title}>
         {book.title}
       </h3>
       <p className="text-gray-600 text-sm truncate">

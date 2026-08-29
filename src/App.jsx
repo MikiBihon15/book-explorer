@@ -11,6 +11,7 @@ export default function App() {
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   // useEffect triggers the fetch whenever searchQuery updates
   useEffect(() => {
@@ -46,11 +47,15 @@ export default function App() {
   
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
-      <SearchBar onSearch={setSearchQuery} />
+    <div className={isDarkMode ? "dark min-h-screen bg-gray-900 text-white font-sans" : "min-h-screen bg-gray-50 text-black font-sans"}>
+      <SearchBar 
+        onSearch={setSearchQuery} 
+        toggleTheme={() => setIsDarkMode(!isDarkMode)}
+        isDarkMode={isDarkMode}
+      />
       
       <div className="p-10 mt-16 max-w-screen-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6 text-black">Book Explorer</h1>
+        <h1 className="text-3xl font-bold mb-6">Book Explorer</h1>
         
         <BookList 
           books={books} 
