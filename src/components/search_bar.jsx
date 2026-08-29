@@ -42,7 +42,7 @@ export default function SearchBar({ onSearch }) {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search books..."
+            placeholder="Search books"
             className="w-64 p-2 bg-gray-50 rounded-lg outline-none text-black border border-gray-200"
             autoFocus
           />

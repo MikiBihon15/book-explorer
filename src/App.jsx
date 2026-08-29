@@ -10,6 +10,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   // useEffect triggers the fetch whenever searchQuery updates
   useEffect(() => {
@@ -27,6 +28,22 @@ export default function App() {
 
     fetchResults();
   }, [searchQuery]);
+  
+  //Track scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // 3. Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0 });
+  };
+
+  
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -49,6 +66,19 @@ export default function App() {
           onClose={() => setSelectedBook(null)} 
         />
       )}
+
+      {/* PASTE IT HERE: Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-3 bg-white border border-gray-200 rounded-full shadow-md hover:bg-gray-100 z-50 text-black transition-none"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
+
     </div>
   );
 }
