@@ -5,7 +5,7 @@ export default function BookDetailsModal({ book, onClose }) {
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/20">
       <div className="bg-white rounded-2xl shadow-xl p-6 max-w-lg w-full mx-4 relative">
         
-        {/* Close Button (Snap interaction) */}
+        {/* CloseBut */}
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 p-2 bg-gray-100 rounded-full hover:bg-gray-200 transition-none"

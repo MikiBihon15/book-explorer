@@ -12,25 +12,29 @@ export default function App() {
   const [selectedBook, setSelectedBook] = useState(null);
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState('');
 
-  // useEffect triggers the fetch whenever searchQuery updates
+  
   useEffect(() => {
     const fetchResults = async () => {
-      const queryToSearch = searchQuery.trim() !== '' ? searchQuery : 'Novel';
+      let queryToSearch = searchQuery.trim();
+      if (!queryToSearch && !selectedCategory) {
+        queryToSearch = 'Bible';
+      }
       
       setIsLoading(true);
       setHasSearched(true);
       
-      const results = await searchBooks(queryToSearch);
+      const results = await searchBooks(queryToSearch, selectedCategory);
       setBooks(results);
       
       setIsLoading(false);
     };
 
     fetchResults();
-  }, [searchQuery]);
+  }, [searchQuery, selectedCategory]);
   
-  //Track scroll
+  //Track scrolling
   useEffect(() => {
     const handleScroll = () => {
       setShowScrollTop(window.scrollY > 300);
@@ -39,7 +43,7 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 3. Scroll to top function
+  //Scroll up
   const scrollToTop = () => {
     window.scrollTo({ top: 0 });
   };
@@ -52,6 +56,8 @@ export default function App() {
         onSearch={setSearchQuery} 
         toggleTheme={() => setIsDarkMode(!isDarkMode)}
         isDarkMode={isDarkMode}
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
       />
       
       <div className="px-10 pb-10 pt-24 max-w-screen-2xl mx-auto">
@@ -72,7 +78,7 @@ export default function App() {
         />
       )}
 
-      {/* PASTE IT HERE: Scroll to Top Button */}
+      {/* Scrollupbut */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}

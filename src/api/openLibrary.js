@@ -1,10 +1,24 @@
-export const searchBooks = async (query) => {
-  if (!query) return [];
-  
+export const searchBooks = async (query, category = '') => {
   try {
-    const formattedQuery = encodeURIComponent(query.trim());
-    const response = await fetch(`https://openlibrary.org/search.json?q=${formattedQuery}`);
+    let url = 'https://openlibrary.org/search.json?';
+    
+    
+    if (query) {
+      url += `q=${encodeURIComponent(query.trim())}`;
+      if (category) url += `&subject=${encodeURIComponent(category)}`;
+    } 
+    
+    else if (category) {
+      url += `subject=${encodeURIComponent(category)}`;
+    } 
+
+    else {
+      url += `q=Computer+Science`;
+    }
+    
+    const response = await fetch(url);
     const data = await response.json();
+    
     return data.docs || [];
   } catch (error) {
     console.error("Failed to fetch books:", error);
